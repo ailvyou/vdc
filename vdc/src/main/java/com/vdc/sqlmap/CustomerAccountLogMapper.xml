@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.vdc.dao.CustomerAccountLogMapper">
+	<resultMap id="BaseResultMap" type="com.vdc.model.CustomerAccountLog">
+		<id column="log_id" property="logId" jdbcType="BIGINT" />
+		<result column="log_time" property="logTime" jdbcType="TIMESTAMP" />
+		<result column="log_by" property="logBy" jdbcType="BIGINT" />
+		<result column="customer_id" property="customerId" jdbcType="BIGINT" />
+		<result column="previous_amount" property="previousAmount" jdbcType="DECIMAL" />
+		<result column="is_recharge" property="isRecharge" jdbcType="INTEGER" />
+		<result column="change_amount" property="changeAmount" jdbcType="DECIMAL" />
+		<result column="current_amount" property="currentAmount" jdbcType="DECIMAL" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		log_id, log_time, log_by, customer_id, previous_amount, is_recharge, change_amount,
+		current_amount
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from customer_account_log
+		where log_id = #{logId,jdbcType=BIGINT}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from customer_account_log
+		where log_id = #{logId,jdbcType=BIGINT}
+	</delete>
+	<insert id="insert" parameterType="com.vdc.model.CustomerAccountLog">
+		insert into customer_account_log (log_time, log_by,
+		customer_id, previous_amount, is_recharge,
+		change_amount, current_amount)
+		values (#{logTime,jdbcType=TIMESTAMP}, #{logBy,jdbcType=BIGINT},
+		#{customerId,jdbcType=BIGINT}, #{previousAmount,jdbcType=DECIMAL}, #{isRecharge,jdbcType=INTEGER},
+		#{changeAmount,jdbcType=DECIMAL}, #{currentAmount,jdbcType=DECIMAL})
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.vdc.model.CustomerAccountLog">
+		update customer_account_log
+		<set>
+			<if test="logTime != null">
+				log_time = #{logTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="logBy != null">
+				log_by = #{logBy,jdbcType=BIGINT},
+			</if>
+			<if test="customerId != null">
+				customer_id = #{customerId,jdbcType=BIGINT},
+			</if>
+			<if test="previousAmount != null">
+				previous_amount = #{previousAmount,jdbcType=DECIMAL},
+			</if>
+			<if test="isRecharge != null">
+				is_recharge = #{isRecharge,jdbcType=INTEGER},
+			</if>
+			<if test="changeAmount != null">
+				change_amount = #{changeAmount,jdbcType=DECIMAL},
+			</if>
+			<if test="currentAmount != null">
+				current_amount = #{currentAmount,jdbcType=DECIMAL},
+			</if>
+		</set>
+		where log_id = #{logId,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.vdc.model.CustomerAccountLog">
+		update customer_account_log
+		set log_time = #{logTime,jdbcType=TIMESTAMP},
+		log_by = #{logBy,jdbcType=BIGINT},
+		customer_id = #{customerId,jdbcType=BIGINT},
+		previous_amount = #{previousAmount,jdbcType=DECIMAL},
+		is_recharge = #{isRecharge,jdbcType=INTEGER},
+		change_amount = #{changeAmount,jdbcType=DECIMAL},
+		current_amount = #{currentAmount,jdbcType=DECIMAL}
+		where log_id = #{logId,jdbcType=BIGINT}
+	</update>
+</mapper>

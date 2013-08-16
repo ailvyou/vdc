@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+	<classPathEntry location="mysql-connector-java-5.0.7-bin.jar" />
+
+	<context id="ctx4mysql" targetRuntime="MyBatis3">
+		<commentGenerator>
+			<property name="suppressAllComments" value="true"/>
+		</commentGenerator>
+		
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://42.121.17.39:3306/snddd?useUnicode=true&amp;characterEncoding=utf-8" userId="luotuo" password="luotuo">
+		</jdbcConnection>
+
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+
+		<javaModelGenerator targetPackage="com.vdc.model" targetProject="/Users/damian/Documents/workspace/vdc/src/main/java">
+			<property name="enableSubPackages" value="true" />
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+
+		<sqlMapGenerator targetPackage="com.vdc.sqlmap" targetProject="/Users/damian/Documents/workspace/vdc/src/main/java">
+			<property name="enableSubPackages" value="true" />
+		</sqlMapGenerator>
+
+		<javaClientGenerator type="XMLMAPPER" targetPackage="com.vdc.dao" targetProject="/Users/damian/Documents/workspace/vdc/src/main/java">
+			<property name="enableSubPackages" value="true" />
+		</javaClientGenerator>
+
+		<table schema="" tableName="menu_info" domainObjectName="" 
+			enableInsert="true"
+			enableCountByExample="false"
+			enableSelectByPrimaryKey="true" enableSelectByExample="false"
+			enableUpdateByPrimaryKey="true" enableUpdateByExample="false"
+			enableDeleteByPrimaryKey="true" enableDeleteByExample="false">
+			<!-- <property name="useActualColumnNames" value="true" />
+			<generatedKey column="ID" sqlStatement="MySql" identity="true" />
+			<columnOverride column="DATE_FIELD" property="startDate" />
+			<ignoreColumn column="FRED" />
+			<columnOverride column="LONG_VARCHAR_FIELD" jdbcType="VARCHAR" /> -->
+		</table>
+		
+		<table schema="" tableName="role_info" domainObjectName="" 
+			enableInsert="true"
+			enableCountByExample="false"
+			enableSelectByPrimaryKey="true" enableSelectByExample="false"
+			enableUpdateByPrimaryKey="true" enableUpdateByExample="false"
+			enableDeleteByPrimaryKey="true" enableDeleteByExample="false">
+		</table>
+		
+		<table schema="" tableName="role_menu_ref" domainObjectName="" 
+			enableInsert="true"
+			enableCountByExample="false"
+			enableSelectByPrimaryKey="true" enableSelectByExample="false"
+			enableUpdateByPrimaryKey="true" enableUpdateByExample="false"
+			enableDeleteByPrimaryKey="true" enableDeleteByExample="false">
+		</table>
+		
+		<table schema="" tableName="customer_info" domainObjectName="" 
+			enableInsert="true"
+			enableCountByExample="false"
+			enableSelectByPrimaryKey="true" enableSelectByExample="false"
+			enableUpdateByPrimaryKey="true" enableUpdateByExample="false"
+			enableDeleteByPrimaryKey="true" enableDeleteByExample="false">
+		</table>
+		
+		<table schema="" tableName="customer_account_log" domainObjectName="" 
+			enableInsert="true"
+			enableCountByExample="false"
+			enableSelectByPrimaryKey="true" enableSelectByExample="false"
+			enableUpdateByPrimaryKey="true" enableUpdateByExample="false"
+			enableDeleteByPrimaryKey="true" enableDeleteByExample="false">
+		</table>
+		
+		<table schema="" tableName="user_info" domainObjectName="" 
+			enableInsert="true"
+			enableCountByExample="false"
+			enableSelectByPrimaryKey="true" enableSelectByExample="false"
+			enableUpdateByPrimaryKey="true" enableUpdateByExample="false"
+			enableDeleteByPrimaryKey="true" enableDeleteByExample="false">
+		</table>
+	
+	</context>
+</generatorConfiguration>
