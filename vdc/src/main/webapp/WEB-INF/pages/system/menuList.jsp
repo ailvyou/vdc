@@ -7,7 +7,7 @@
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <title>菜单列表 - Powered By SHOP++</title>
 <meta name="author" content="SHOP++ Team" />
-<meta name="copyright" content="SHOP++" />
+<meta name="copyright" content="SHOP++" />  
 <link href="${ctx}/css/common.css" rel="stylesheet" type="text/css" />
 <link href="${ctx}/css/ui/themes/default/easyui.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="${ctx}/js/jquery.js"></script>
