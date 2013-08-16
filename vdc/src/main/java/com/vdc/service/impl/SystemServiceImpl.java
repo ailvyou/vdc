@@ -1,5 +1,6 @@
 package com.vdc.service.impl;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -15,6 +16,7 @@ import com.vdc.dao.RoleInfoMapper;
 import com.vdc.dao.UserInfoMapper;
 import com.vdc.dto.Pagination;
 import com.vdc.dto.TreeObject;
+import com.vdc.enums.RoleEnum;
 import com.vdc.model.CustomerAccountLog;
 import com.vdc.model.CustomerInfo;
 import com.vdc.model.MenuInfo;
@@ -122,10 +124,14 @@ public class SystemServiceImpl implements SystemService {
 	}
 
 	public void insertUserInfo(UserInfo record) {
+		record.setIsLocked(0);
+		record.setCreateTime(new Date());
+		record.setUpdateTime(new Date());
 		this.userInfoMapper.insert(record);
 	}
 
 	public void updateUserInfo(UserInfo record) {
+		record.setUpdateTime(new Date());
 		this.userInfoMapper.updateByPrimaryKey(record);
 	}
 
@@ -144,10 +150,29 @@ public class SystemServiceImpl implements SystemService {
 	}
 
 	public void insertCustomerInfo(CustomerInfo record) {
+		record.setCreateTime(new Date());
+		record.setUpdateTime(new Date());
+		record.setAccountBalance(BigDecimal.ZERO);
 		this.customerInfoMapper.insert(record);
+
+		String userName = record.getEmail() == null ? ("admin_" + record.getCustomerId()) : record.getEmail().trim();
+		String password = "123456";
+		UserInfo user = new UserInfo();
+		user.setUserName(userName);
+		user.setPassword(password);
+		user.setCustomerId(record.getCustomerId());
+		user.setRoleId(RoleEnum.CUSTOMER_ADMIN.getRoleId());
+		user.setRealName(record.getCustomerName() + "（管理员）");
+		user.setEmail(record.getEmail());
+		user.setQq(record.getQq());
+		user.setTelephone(record.getTelephone());
+		user.setMobilephone(record.getMobilephone());
+		user.setFax(record.getFax());
+		this.insertUserInfo(user);
 	}
 
 	public void updateCustomerInfo(CustomerInfo record) {
+		record.setUpdateTime(new Date());
 		this.customerInfoMapper.updateByPrimaryKey(record);
 	}
 

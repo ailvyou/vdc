@@ -4,12 +4,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<title>管理中心 - Powered By SHOP++</title>
+<title>管理中心 - Powered By VDC</title>
 <meta http-equiv="expires" content="0" />
 <meta http-equiv="Pragma" content="no-cache" />
 <meta http-equiv="Cache-Control" content="no-cache" />
-<meta name="author" content="SHOP++ Team" />
-<meta name="copyright" content="SHOP++" />
+<meta name="author" content="VDC Team" />
+<meta name="copyright" content="VDC" />
 <link href="${ctx}/css/common.css" rel="stylesheet" type="text/css" />
 <link href="${ctx}/css/login.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="${ctx}/js/jquery.js"></script>
@@ -88,7 +88,7 @@
 				<table>
 					<tr>
 						<td width="190" rowspan="2" align="center" valign="bottom">
-							<img src="${ctx}/images/login_logo.gif" alt="SHOP++" />
+							<img src="${ctx}/images/login_logo.gif" alt="VDC" />
 						</td>
 						<th>
 							用户名:
@@ -144,14 +144,14 @@
 						</td>
 					</tr>
 				</table>
-				<div class="powered">COPYRIGHT © 2005-2013 SHOPXX.NET ALL RIGHTS RESERVED.</div>
+				<div class="powered">COPYRIGHT © 2013 ailvyou.cn ALL RIGHTS RESERVED.</div>
 				<div class="link">
 					<a href="/shopxx/">前台首页</a> |
-					<a href="http://www.shopxx.net">官方网站</a> |
-					<a href="http://bbs.shopxx.net">交流论坛</a> |
-					<a href="http://www.shopxx.net/about.html">关于我们</a> |
-					<a href="http://www.shopxx.net/contact.html">联系我们</a> |
-					<a href="http://www.shopxx.net/license.html">授权查询</a>
+					<a href="http://www.ailvyou.cn">官方网站</a> |
+					<a href="http://bbs.ailvyou.cn">交流论坛</a> |
+					<a href="http://www.ailvyou.cn/about.html">关于我们</a> |
+					<a href="http://www.ailvyou.cn/contact.html">联系我们</a> |
+					<a href="http://www.ailvyou.cn/license.html">授权查询</a>
 				</div>
 			</form>
 		</div>

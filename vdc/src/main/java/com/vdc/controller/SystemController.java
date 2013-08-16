@@ -17,8 +17,10 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.gson.reflect.TypeToken;
 import com.vdc.dto.Pagination;
 import com.vdc.dto.TreeObject;
+import com.vdc.model.CustomerInfo;
 import com.vdc.model.MenuInfo;
 import com.vdc.model.RoleInfo;
+import com.vdc.model.UserInfo;
 import com.vdc.service.SystemService;
 import com.vdc.util.JsonUtil;
 
@@ -167,5 +169,86 @@ public class SystemController extends BaseController {
 			this.systemService.updateRoleInfo(roleInDb);
 		}
 		super.outputJson(true, null, response);
+	}
+
+	/*****************************************************/
+	/**
+	 * 用户列表
+	 * 
+	 * @param pagination
+	 * @param paramMap
+	 * @return
+	 */
+	@RequestMapping("/user/list")
+	public ModelAndView listUser(@ModelAttribute Pagination<UserInfo> pagination, @RequestParam Map<String, Object> paramMap) {
+		ModelAndView mv = new ModelAndView("/system/userList");
+
+		if (paramMap.get("searchProperty") != null && !"".equals(paramMap.get("searchProperty").toString())) {
+			paramMap.put(paramMap.get("searchProperty").toString(), paramMap.get("searchValue").toString());
+		}
+		this.systemService.selectUserWithPagination(pagination, paramMap);
+
+		return mv;
+	}
+
+	/*****************************************************/
+	/**
+	 * 客户列表
+	 * 
+	 * @param pagination
+	 * @param paramMap
+	 * @return
+	 */
+	@RequestMapping("/customer/list")
+	public ModelAndView listCustomer(@ModelAttribute Pagination<CustomerInfo> pagination, @RequestParam Map<String, Object> paramMap) {
+		ModelAndView mv = new ModelAndView("/system/customerList");
+
+		if (paramMap.get("searchProperty") != null && !"".equals(paramMap.get("searchProperty").toString())) {
+			paramMap.put(paramMap.get("searchProperty").toString(), paramMap.get("searchValue").toString());
+		}
+		this.systemService.selectCustomerWithPagination(pagination, paramMap);
+
+		return mv;
+	}
+
+	@RequestMapping("/customer/create")
+	public ModelAndView createCustomer() {
+		ModelAndView mv = new ModelAndView("/system/customerEdit");
+		return mv;
+	}
+
+	@RequestMapping("/customer/save")
+	public ModelAndView saveCustomer(@ModelAttribute CustomerInfo customerForm) {
+		ModelAndView mv = new ModelAndView("redirect:/system/customer/list");
+
+		this.systemService.insertCustomerInfo(customerForm);
+
+		return mv;
+	}
+
+	@RequestMapping("/customer/edit/{customerId}")
+	public ModelAndView editCustomer(@PathVariable Long customerId) {
+		ModelAndView mv = new ModelAndView("/system/customerEdit");
+
+		mv.addObject("customer", this.systemService.selectCustomerInfoById(customerId));
+
+		return mv;
+	}
+
+	@RequestMapping("/customer/update/{customerId}")
+	public ModelAndView updateCustomer(@PathVariable Long customerId, @ModelAttribute CustomerInfo customerForm) {
+		ModelAndView mv = new ModelAndView("redirect:/system/customer/list");
+
+		CustomerInfo customerInDb = this.systemService.selectCustomerInfoById(customerId);
+		customerInDb.setCustomerName(customerForm.getCustomerName());
+		customerInDb.setContactName(customerForm.getContactName());
+		customerInDb.setTelephone(customerForm.getTelephone());
+		customerInDb.setMobilephone(customerForm.getMobilephone());
+		customerInDb.setEmail(customerForm.getEmail());
+		customerInDb.setQq(customerForm.getQq());
+		customerInDb.setFax(customerForm.getFax());
+		this.systemService.updateCustomerInfo(customerInDb);
+
+		return mv;
 	}
 }

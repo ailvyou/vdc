@@ -4,9 +4,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<title>管理中心 - Powered By SHOP++</title>
-<meta name="author" content="SHOP++ Team" />
-<meta name="copyright" content="SHOP++" />
+<title>管理中心 - Powered By VDC</title>
+<meta name="author" content="VDC Team" />
+<meta name="copyright" content="VDC" />
 <link href="${ctx}/css/common.css" rel="stylesheet" type="text/css" />
 <link href="${ctx}/css/main.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="${ctx}/js/jquery.js"></script>
@@ -56,7 +56,7 @@ $().ready(function() {
 		<tr>
 			<th class="logo">
 				<a href="main.jhtml">
-					<img src="${ctx}/images/header_logo.gif" alt="SHOP++" />
+					<img src="${ctx}/images/header_logo.gif" alt="VDC" />
 				</a>
 			</th>
 			<th>

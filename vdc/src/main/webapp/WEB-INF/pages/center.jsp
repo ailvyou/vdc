@@ -4,9 +4,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<title>管理中心首页 - Powered By SHOP++</title>
-<meta name="author" content="SHOP++ Team" />
-<meta name="copyright" content="SHOP++" />
+<title>管理中心首页 - Powered By VDC</title>
+<meta name="author" content="VDC Team" />
+<meta name="copyright" content="VDC" />
 <link href="${ctx}/css/common.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="${ctx}/js/jquery.js"></script>
 <script type="text/javascript" src="${ctx}/js/common.js"></script>
@@ -35,7 +35,7 @@ $().ready(function() {
 				系统名称:
 			</th>
 			<td>
-				SHOP++网上商城系统
+				VDC网上商城系统
 			</td>
 			<th>
 				系统版本:
@@ -49,13 +49,13 @@ $().ready(function() {
 				官方网站:
 			</th>
 			<td>
-				<a href="http://www.shopxx.net" target="_blank">http://www.shopxx.net</a>
+				<a href="http://www.ailvyou.cn" target="_blank">http://www.ailvyou.cn</a>
 			</td>
 			<th>
 				官方论坛:
 			</th>
 			<td>
-				<a href="http://bbs.shopxx.net" target="_blank">http://bbs.shopxx.net</a>
+				<a href="http://bbs.ailvyou.cn" target="_blank">http://bbs.ailvyou.cn</a>
 			</td>
 		</tr>
 		<tr>
@@ -168,7 +168,7 @@ $().ready(function() {
 		</tr>
 		<tr>
 			<td class="powered" colspan="4">
-				COPYRIGHT © 2005-2013 SHOPXX.NET ALL RIGHTS RESERVED.
+				COPYRIGHT © 2013 ailvyou.cn ALL RIGHTS RESERVED.
 			</td>
 		</tr>
 	</table>

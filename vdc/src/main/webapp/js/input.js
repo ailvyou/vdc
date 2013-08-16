@@ -1,7 +1,7 @@
 /*
- * Copyright 2005-2013 shopxx.net. All rights reserved.
- * Support: http://www.shopxx.net
- * License: http://www.shopxx.net/license
+ * Copyright 2013 ailvyou.cn. All rights reserved.
+ * Support: http://www.ailvyou.cn
+ * License: http://www.ailvyou.cn/license
  * 
  * JavaScript - Input
  * Version: 3.0
