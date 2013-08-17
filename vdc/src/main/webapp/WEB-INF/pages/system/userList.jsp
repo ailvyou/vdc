@@ -108,7 +108,7 @@ $().ready(function() {
 					<a href="javascript:;" name="fax">传真</a>
 				</th>
 				<th>
-					<a href="javascript:;" name="isLocked">是否锁定</a>
+					<a href="javascript:;" name="isLocked">是否启用</a>
 				</th>
 				<th>
 					<a href="javascript:;" name="createTime">创建时间</a>
@@ -153,7 +153,7 @@ $().ready(function() {
 						${item.fax}
 					</td>
 					<td>
-						<span class="${item.isLocked==1?'trueIcon':'falseIcon'}"></span>
+						<span class="${item.isLocked==0?'trueIcon':'falseIcon'}"></span>
 					</td>
 					<td>
 						<fmt:formatDate var="createTime" value="${item.createTime}" pattern="yyyy-MM-dd HH:mm:ss" />
@@ -174,7 +174,7 @@ $().ready(function() {
 		<input type="hidden" id="searchProperty" name="searchProperty" value="" />
 		<input type="hidden" id="orderProperty" name="orderProperty" value="" />
 		<input type="hidden" id="orderDirection" name="orderDirection" value="" />
-		<input type="hidden" id="pageSize" name="pageSize" value="3" />
+		<input type="hidden" id="pageSize" name="pageSize" value="10" />
 		<jsp:include page="/WEB-INF/pages/common/pagination.jsp" flush="true"/>
 	</form>
 </body>

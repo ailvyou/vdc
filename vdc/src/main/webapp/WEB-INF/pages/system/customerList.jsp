@@ -165,7 +165,7 @@ $().ready(function() {
 		<input type="hidden" id="searchProperty" name="searchProperty" value="" />
 		<input type="hidden" id="orderProperty" name="orderProperty" value="" />
 		<input type="hidden" id="orderDirection" name="orderDirection" value="" />
-		<input type="hidden" id="pageSize" name="pageSize" value="3" />
+		<input type="hidden" id="pageSize" name="pageSize" value="10" />
 		<jsp:include page="/WEB-INF/pages/common/pagination.jsp" flush="true"/>
 	</form>
 </body>

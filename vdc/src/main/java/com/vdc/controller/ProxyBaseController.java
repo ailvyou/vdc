@@ -13,15 +13,15 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.http.client.ClientProtocolException;
 import org.apache.http.entity.mime.content.InputStreamBody;
 import org.apache.http.entity.mime.content.StringBody;
 
 import com.vdc.componet.ServletUploadFileItem;
 import com.vdc.util.HttpClientUtil;
 
-
 /**
- * 代理控制器
+ * 代理controller基类
  * 
  * @author daniel
  */

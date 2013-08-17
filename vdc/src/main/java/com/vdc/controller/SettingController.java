@@ -13,14 +13,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.vdc.dto.Pagination;
-import com.vdc.enums.RoleEnum;
 import com.vdc.model.RoleInfo;
 import com.vdc.model.UserInfo;
 import com.vdc.service.SystemService;
 
 @RequestMapping("/setting")
 @Controller
-public class SettingController extends BaseController {
+public class SettingController extends BizBaseController {
 
 	@Autowired
 	private SystemService systemService;
@@ -35,63 +34,42 @@ public class SettingController extends BaseController {
 	 */
 	@RequestMapping("/role/list")
 	public ModelAndView listRole(@ModelAttribute Pagination<RoleInfo> pagination, @RequestParam Map<String, Object> paramMap) {
-		ModelAndView mv = new ModelAndView("/setting/roleList");
-
-		paramMap.put("customerId", 1L);
-		if (paramMap.get("searchProperty") != null && !"".equals(paramMap.get("searchProperty").toString())) {
-			paramMap.put(paramMap.get("searchProperty").toString(), paramMap.get("searchValue").toString());
-		}
-		this.systemService.selectRoleWithPagination(pagination, paramMap);
-
+		ModelAndView mv = super.listRole(pagination, paramMap);
+		mv.setViewName("/setting/roleList");
 		return mv;
 	}
 
 	@RequestMapping("/role/create")
 	public ModelAndView createRole() {
-		ModelAndView mv = new ModelAndView("/setting/roleEdit");
+		ModelAndView mv = super.createRole();
+		mv.setViewName("/setting/roleEdit");
 		return mv;
 	}
 
 	@RequestMapping("/role/save")
 	public ModelAndView saveRole(@ModelAttribute RoleInfo roleForm) {
-		ModelAndView mv = new ModelAndView("redirect:/setting/role/list");
-
-		roleForm.setCustomerId(1L);
-		roleForm.setParentRoleId(RoleEnum.CUSTOMER_ADMIN.getRoleId());
-		this.systemService.insertRoleInfo(roleForm);
-
+		ModelAndView mv = super.saveRole(roleForm);
+		mv.setViewName("redirct:/setting/role/list");
 		return mv;
 	}
 
 	@RequestMapping("/role/edit/{roleId}")
 	public ModelAndView editRole(@PathVariable Long roleId) {
-		ModelAndView mv = new ModelAndView("/setting/roleEdit");
-
-		mv.addObject("role", this.systemService.selectRoleInfoById(roleId));
-
+		ModelAndView mv = super.editRole(roleId);
+		mv.setViewName("/setting/roleEdit");
 		return mv;
 	}
 
 	@RequestMapping("/role/update/{roleId}")
 	public ModelAndView updateRole(@PathVariable Long roleId, @ModelAttribute RoleInfo roleForm) {
-		ModelAndView mv = new ModelAndView("redirect:/setting/role/list");
-
-		RoleInfo roleInDb = this.systemService.selectRoleInfoById(roleId);
-		roleInDb.setRoleName(roleForm.getRoleName());
-		this.systemService.updateRoleInfo(roleInDb);
-
+		ModelAndView mv = super.updateRole(roleId, roleForm);
+		mv.setViewName("redirct:/setting/role/list");
 		return mv;
 	}
 
 	@RequestMapping("/role/delete")
 	public void deleteRole(@RequestParam String ids, HttpServletResponse response) {
-		String[] tempArr = ids.split(",");
-		for (String id : tempArr) {
-			RoleInfo roleInDb = this.systemService.selectRoleInfoById(Long.valueOf(id));
-			roleInDb.setIsEnabled(0);
-			this.systemService.updateRoleInfo(roleInDb);
-		}
-		super.outputJson(true, null, response);
+		super.deleteRole(ids, response);
 	}
 
 	/*****************************************************/
@@ -104,14 +82,41 @@ public class SettingController extends BaseController {
 	 */
 	@RequestMapping("/user/list")
 	public ModelAndView listUser(@ModelAttribute Pagination<UserInfo> pagination, @RequestParam Map<String, Object> paramMap) {
-		ModelAndView mv = new ModelAndView("/setting/userList");
-
-		paramMap.put("customerId", 1L);
-		if (paramMap.get("searchProperty") != null && !"".equals(paramMap.get("searchProperty").toString())) {
-			paramMap.put(paramMap.get("searchProperty").toString(), paramMap.get("searchValue").toString());
-		}
-		this.systemService.selectUserWithPagination(pagination, paramMap);
-
+		ModelAndView mv = super.listUser(pagination, paramMap);
+		mv.setViewName("/setting/userList");
 		return mv;
+	}
+
+	@RequestMapping("/user/create")
+	public ModelAndView createUser() {
+		ModelAndView mv = super.createUser();
+		mv.setViewName("/setting/userEdit");
+		return mv;
+	}
+
+	@RequestMapping("/user/save")
+	public ModelAndView saveUser(@ModelAttribute UserInfo userForm) {
+		ModelAndView mv = super.saveUser(userForm);
+		mv.setViewName("redirect:/setting/user/list");
+		return mv;
+	}
+
+	@RequestMapping("/user/edit/{userId}")
+	public ModelAndView editUser(@PathVariable Long userId) {
+		ModelAndView mv = super.editUser(userId);
+		mv.setViewName("/setting/userEdit");
+		return mv;
+	}
+
+	@RequestMapping("/user/update/{userId}")
+	public ModelAndView updateUser(@PathVariable Long userId, @ModelAttribute UserInfo userForm) {
+		ModelAndView mv = super.updateUser(userId, userForm);
+		mv.setViewName("redirect:/setting/user/list");
+		return mv;
+	}
+
+	@RequestMapping("/user/delete")
+	public void deleteUser(@RequestParam String ids, HttpServletResponse response) {
+		super.deleteUser(ids, response);
 	}
 }

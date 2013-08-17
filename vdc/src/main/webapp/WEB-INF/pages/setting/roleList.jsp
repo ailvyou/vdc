@@ -80,6 +80,12 @@ $().ready(function() {
 				<th>
 					<a href="javascript:;" name="roleName">名称</a>
 				</th>
+				<!-- <th>
+					<a href="javascript:;" name="parentRoleId">父角色</a>
+				</th>
+				<th>
+					<a href="javascript:;" name="customerId">所属客户</a>
+				</th> -->
 				<th>
 					<a href="javascript:;" name="isEnabled">是否启用</a>
 				</th>
@@ -101,6 +107,12 @@ $().ready(function() {
 					<td>
 						${item.roleName}
 					</td>
+					<%-- <td>
+						${item.parentRoleId}
+					</td>
+					<td>
+						${item.customerId}
+					</td> --%>
 					<td>
 						<span class="${item.isEnabled==1?'trueIcon':'falseIcon'}"></span>
 					</td>
@@ -123,7 +135,7 @@ $().ready(function() {
 		<input type="hidden" id="searchProperty" name="searchProperty" value="" />
 		<input type="hidden" id="orderProperty" name="orderProperty" value="" />
 		<input type="hidden" id="orderDirection" name="orderDirection" value="" />
-		<input type="hidden" id="pageSize" name="pageSize" value="3" />
+		<input type="hidden" id="pageSize" name="pageSize" value="10" />
 		<jsp:include page="/WEB-INF/pages/common/pagination.jsp" flush="true"/>
 	</form>
 </body>

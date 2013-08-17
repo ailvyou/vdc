@@ -29,6 +29,8 @@ public interface SystemService {
 
 	public void updateMenuInfo(MenuInfo record);
 
+	public List<RoleInfo> selectRole(Map<String, Object> paramMap);
+
 	public Pagination<RoleInfo> selectRoleWithPagination(Pagination<RoleInfo> pagination, Map<String, Object> paramMap);
 
 	public RoleInfo selectRoleInfoById(Long id);

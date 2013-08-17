@@ -56,7 +56,6 @@ $().ready(function() {
 	<c:set var="actionUrl" value="${ctx}/system/role/update/${roleId}"/>
 	</c:if>
 	<form id="inputForm" action="${actionUrl}" method="post">
-		<input type="hidden" name="parentRoleId" value="" />
 		<table class="input tabContent">
 			<tr>
 				<th>

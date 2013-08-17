@@ -26,7 +26,7 @@ import com.vdc.util.JsonUtil;
 
 @RequestMapping("/system")
 @Controller
-public class SystemController extends BaseController {
+public class SystemController extends BizBaseController {
 
 	@Autowired
 	private SystemService systemService;
@@ -115,60 +115,32 @@ public class SystemController extends BaseController {
 	 */
 	@RequestMapping("/role/list")
 	public ModelAndView listRole(@ModelAttribute Pagination<RoleInfo> pagination, @RequestParam Map<String, Object> paramMap) {
-		ModelAndView mv = new ModelAndView("/system/roleList");
-
-		if (paramMap.get("searchProperty") != null && !"".equals(paramMap.get("searchProperty").toString())) {
-			paramMap.put(paramMap.get("searchProperty").toString(), paramMap.get("searchValue").toString());
-		}
-		this.systemService.selectRoleWithPagination(pagination, paramMap);
-
-		return mv;
+		return super.listRole(pagination, paramMap);
 	}
 
 	@RequestMapping("/role/create")
 	public ModelAndView createRole() {
-		ModelAndView mv = new ModelAndView("/system/roleEdit");
-		return mv;
+		return super.createRole();
 	}
 
 	@RequestMapping("/role/save")
 	public ModelAndView saveRole(@ModelAttribute RoleInfo roleForm) {
-		ModelAndView mv = new ModelAndView("redirect:/system/role/list");
-
-		this.systemService.insertRoleInfo(roleForm);
-
-		return mv;
+		return super.saveRole(roleForm);
 	}
 
 	@RequestMapping("/role/edit/{roleId}")
 	public ModelAndView editRole(@PathVariable Long roleId) {
-		ModelAndView mv = new ModelAndView("/system/roleEdit");
-
-		mv.addObject("role", this.systemService.selectRoleInfoById(roleId));
-
-		return mv;
+		return super.editRole(roleId);
 	}
 
 	@RequestMapping("/role/update/{roleId}")
 	public ModelAndView updateRole(@PathVariable Long roleId, @ModelAttribute RoleInfo roleForm) {
-		ModelAndView mv = new ModelAndView("redirect:/system/role/list");
-
-		RoleInfo roleInDb = this.systemService.selectRoleInfoById(roleId);
-		roleInDb.setRoleName(roleForm.getRoleName());
-		this.systemService.updateRoleInfo(roleInDb);
-
-		return mv;
+		return super.updateRole(roleId, roleForm);
 	}
 
 	@RequestMapping("/role/delete")
 	public void deleteRole(@RequestParam String ids, HttpServletResponse response) {
-		String[] tempArr = ids.split(",");
-		for (String id : tempArr) {
-			RoleInfo roleInDb = this.systemService.selectRoleInfoById(Long.valueOf(id));
-			roleInDb.setIsEnabled(0);
-			this.systemService.updateRoleInfo(roleInDb);
-		}
-		super.outputJson(true, null, response);
+		super.deleteRole(ids, response);
 	}
 
 	/*****************************************************/
@@ -181,14 +153,37 @@ public class SystemController extends BaseController {
 	 */
 	@RequestMapping("/user/list")
 	public ModelAndView listUser(@ModelAttribute Pagination<UserInfo> pagination, @RequestParam Map<String, Object> paramMap) {
-		ModelAndView mv = new ModelAndView("/system/userList");
-
-		if (paramMap.get("searchProperty") != null && !"".equals(paramMap.get("searchProperty").toString())) {
-			paramMap.put(paramMap.get("searchProperty").toString(), paramMap.get("searchValue").toString());
-		}
-		this.systemService.selectUserWithPagination(pagination, paramMap);
-
+		ModelAndView mv = super.listUser(pagination, paramMap);
 		return mv;
+	}
+
+	@RequestMapping("/user/create")
+	public ModelAndView createUser() {
+		ModelAndView mv = super.createUser();
+		return mv;
+	}
+
+	@RequestMapping("/user/save")
+	public ModelAndView saveUser(@ModelAttribute UserInfo userForm) {
+		ModelAndView mv = super.saveUser(userForm);
+		return mv;
+	}
+
+	@RequestMapping("/user/edit/{userId}")
+	public ModelAndView editUser(@PathVariable Long userId) {
+		ModelAndView mv = super.editUser(userId);
+		return mv;
+	}
+
+	@RequestMapping("/user/update/{userId}")
+	public ModelAndView updateUser(@PathVariable Long userId, @ModelAttribute UserInfo userForm) {
+		ModelAndView mv = super.updateUser(userId, userForm);
+		return mv;
+	}
+
+	@RequestMapping("/user/delete")
+	public void deleteUser(@RequestParam String ids, HttpServletResponse response) {
+		super.deleteUser(ids, response);
 	}
 
 	/*****************************************************/

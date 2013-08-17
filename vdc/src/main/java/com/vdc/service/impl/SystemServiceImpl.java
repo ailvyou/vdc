@@ -71,6 +71,11 @@ public class SystemServiceImpl implements SystemService {
 		this.menuInfoMapper.updateByPrimaryKey(record);
 	}
 
+	public List<RoleInfo> selectRole(Map<String, Object> paramMap) {
+		List<RoleInfo> roleList = this.roleInfoMapper.selectRole(paramMap);
+		return roleList;
+	}
+
 	public Pagination<RoleInfo> selectRoleWithPagination(Pagination<RoleInfo> pagination, Map<String, Object> paramMap) {
 		int numFound = this.roleInfoMapper.countRole(paramMap);
 		pagination.setNumFound(numFound);
@@ -127,6 +132,9 @@ public class SystemServiceImpl implements SystemService {
 		record.setIsLocked(0);
 		record.setCreateTime(new Date());
 		record.setUpdateTime(new Date());
+		if (record.getPassword() == null || "".equals(record.getPassword().trim())) {
+			record.setPassword("123456");
+		}
 		this.userInfoMapper.insert(record);
 	}
 
@@ -156,10 +164,8 @@ public class SystemServiceImpl implements SystemService {
 		this.customerInfoMapper.insert(record);
 
 		String userName = record.getEmail() == null ? ("admin_" + record.getCustomerId()) : record.getEmail().trim();
-		String password = "123456";
 		UserInfo user = new UserInfo();
 		user.setUserName(userName);
-		user.setPassword(password);
 		user.setCustomerId(record.getCustomerId());
 		user.setRoleId(RoleEnum.CUSTOMER_ADMIN.getRoleId());
 		user.setRealName(record.getCustomerName() + "（管理员）");
