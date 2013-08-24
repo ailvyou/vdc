@@ -9,7 +9,13 @@
 <meta name="author" content="VDC Team" />
 <meta name="copyright" content="VDC" />
 <link href="${ctx}/css/common.css" rel="stylesheet" type="text/css" />
+<link href="${ctx}/css/ui/themes/default/easyui.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="${ctx}/js/jquery.js"></script>
+<script type="text/javascript" src="${ctx}/js/jquery.form.js"></script>
+<script type="text/javascript" src="${ctx}/js/jquery.tools.js"></script>
+<script type="text/javascript" src="${ctx}/js/jquery.validate.js"></script>
+<script type="text/javascript" src="${ctx}/js/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="${ctx}/js/base.js"></script>
 <script type="text/javascript" src="${ctx}/js/common.js"></script>
 <script type="text/javascript" src="${ctx}/js/list.js"></script>
 <style type="text/css">
@@ -37,6 +43,23 @@
 $().ready(function() {
 	
 });
+function gotoAuthorize(roleId){
+	var actionUrl="${ctx}/system/role/gotoAuthorize/"+roleId;
+	$.dialog({
+		title: "分配菜单",
+		content: "",
+		width: 670,
+		modal: true,
+		ok: "保&nbsp;&nbsp;存",
+		cancel: "关&nbsp;&nbsp;闭",
+		onShow: function(){
+			ajaxRequestCommon(".dialogContent",actionUrl,"get","html",null);
+		},
+		onOk: function(){
+			setRoleMenuData();
+		}
+	});	
+}
 </script>
 </head>
 <body>
@@ -128,6 +151,7 @@ $().ready(function() {
 					</td>
 					<td>
 						<a href="${ctx}/system/role/edit/${item.roleId}">[编辑]</a>
+						<a style="margin-left:20px" href="javascript:;" onclick="gotoAuthorize('${item.roleId}');">[分配菜单]</a>
 					</td>
 				</tr>
 			</c:forEach>

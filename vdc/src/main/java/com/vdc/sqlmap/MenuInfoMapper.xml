@@ -28,7 +28,7 @@
 			(select (case when count(1)>0 then 'closed' else '' end) from menu_info where parent_menu_id=mi.menu_id) as state
 		from menu_info mi
 		where mi.is_enabled=1
-		<if test="parentMenuId == null">
+		<if test="parentMenuIdIsNull != null">
 			and mi.parent_menu_id is null
 		</if>
 		<if test="parentMenuId != null">
@@ -50,6 +50,9 @@
 		count(1)
 		from menu_info mi
 		where mi.is_enabled=1
+		<if test="parentMenuIdIsNull != null">
+			and mi.parent_menu_id is null
+		</if>
 		<if test="parentMenuId != null">
 			and mi.parent_menu_id = #{parentMenuId,jdbcType=BIGINT}
 		</if>
@@ -68,6 +71,9 @@
 		<include refid="Base_Column_List" />
 		from menu_info mi
 		where mi.is_enabled=1
+		<if test="parentMenuIdIsNull != null">
+			and mi.parent_menu_id is null
+		</if>
 		<if test="parentMenuId != null">
 			and mi.parent_menu_id = #{parentMenuId,jdbcType=BIGINT}
 		</if>

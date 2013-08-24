@@ -9,6 +9,7 @@ import com.vdc.model.CustomerAccountLog;
 import com.vdc.model.CustomerInfo;
 import com.vdc.model.MenuInfo;
 import com.vdc.model.RoleInfo;
+import com.vdc.model.RoleMenuRef;
 import com.vdc.model.UserInfo;
 
 /**
@@ -19,7 +20,7 @@ import com.vdc.model.UserInfo;
  */
 public interface SystemService {
 
-	public List<TreeObject> getMenuTree(Long parentMenuId);
+	public List<TreeObject> getMenuTreeByParentId(Long parentMenuId);
 
 	public List<MenuInfo> selectMenu(Map<String, Object> paramMap);
 
@@ -38,6 +39,10 @@ public interface SystemService {
 	public void insertRoleInfo(RoleInfo record);
 
 	public void updateRoleInfo(RoleInfo record);
+
+	public TreeObject getMenuTreeByRoleId(Long roleId);
+
+	public void saveRoleMenuList(Long roleId, List<RoleMenuRef> rmList);
 
 	public Pagination<UserInfo> selectUserWithPagination(Pagination<UserInfo> pagination, Map<String, Object> paramMap);
 

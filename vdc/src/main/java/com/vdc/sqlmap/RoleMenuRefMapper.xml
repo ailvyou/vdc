@@ -12,6 +12,9 @@
 	<sql id="Base_Column_List">
 		role_menu_id, role_id, menu_id, is_deleted, create_time, create_by
 	</sql>
+	<update id="deleteByRoleId" parameterType="java.lang.Long">
+	    update role_menu_ref set is_deleted = 1 where role_id = #{roleId,jdbcType=BIGINT}
+	</update>
 	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
 		select
 		<include refid="Base_Column_List" />

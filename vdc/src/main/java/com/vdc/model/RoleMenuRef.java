@@ -4,68 +4,77 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class RoleMenuRef implements Serializable {
-    /**
+	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -3847440425256493715L;
 
 	private Long roleMenuId;
 
-    private Long roleId;
+	private Long roleId;
 
-    private Long menuId;
+	private Long menuId;
 
-    private Integer isDeleted;
+	private Integer isDeleted;
 
-    private Date createTime;
+	private Date createTime;
 
-    private Long createBy;
+	private Long createBy;
 
-    public Long getRoleMenuId() {
-        return roleMenuId;
-    }
+	public RoleMenuRef(Long roleId, Long menuId, Long createBy) {
+		super();
+		this.roleId = roleId;
+		this.menuId = menuId;
+		this.createBy = createBy;
+		this.isDeleted = 0;
+		this.createTime = new Date();
+	}
 
-    public void setRoleMenuId(Long roleMenuId) {
-        this.roleMenuId = roleMenuId;
-    }
+	public Long getRoleMenuId() {
+		return roleMenuId;
+	}
 
-    public Long getRoleId() {
-        return roleId;
-    }
+	public void setRoleMenuId(Long roleMenuId) {
+		this.roleMenuId = roleMenuId;
+	}
 
-    public void setRoleId(Long roleId) {
-        this.roleId = roleId;
-    }
+	public Long getRoleId() {
+		return roleId;
+	}
 
-    public Long getMenuId() {
-        return menuId;
-    }
+	public void setRoleId(Long roleId) {
+		this.roleId = roleId;
+	}
 
-    public void setMenuId(Long menuId) {
-        this.menuId = menuId;
-    }
+	public Long getMenuId() {
+		return menuId;
+	}
 
-    public Integer getIsDeleted() {
-        return isDeleted;
-    }
+	public void setMenuId(Long menuId) {
+		this.menuId = menuId;
+	}
 
-    public void setIsDeleted(Integer isDeleted) {
-        this.isDeleted = isDeleted;
-    }
+	public Integer getIsDeleted() {
+		return isDeleted;
+	}
 
-    public Date getCreateTime() {
-        return createTime;
-    }
+	public void setIsDeleted(Integer isDeleted) {
+		this.isDeleted = isDeleted;
+	}
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
+	public Date getCreateTime() {
+		return createTime;
+	}
 
-    public Long getCreateBy() {
-        return createBy;
-    }
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
 
-    public void setCreateBy(Long createBy) {
-        this.createBy = createBy;
-    }
+	public Long getCreateBy() {
+		return createBy;
+	}
+
+	public void setCreateBy(Long createBy) {
+		this.createBy = createBy;
+	}
 }

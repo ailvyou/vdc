@@ -3,15 +3,17 @@ package com.vdc.dao;
 import com.vdc.model.RoleMenuRef;
 
 public interface RoleMenuRefMapper {
-    int deleteByPrimaryKey(Long roleMenuId);
+	int deleteByRoleId(Long roleId);
 
-    int insert(RoleMenuRef record);
+	int deleteByPrimaryKey(Long roleMenuId);
 
-//    int insertSelective(RoleMenuRef record);
+	int insert(RoleMenuRef record);
 
-    RoleMenuRef selectByPrimaryKey(Long roleMenuId);
+	// int insertSelective(RoleMenuRef record);
 
-    int updateByPrimaryKeySelective(RoleMenuRef record);
+	RoleMenuRef selectByPrimaryKey(Long roleMenuId);
 
-    int updateByPrimaryKey(RoleMenuRef record);
+	int updateByPrimaryKeySelective(RoleMenuRef record);
+
+	int updateByPrimaryKey(RoleMenuRef record);
 }

@@ -16,6 +16,7 @@ public class TreeObject implements Serializable {
 	private String state;
 	private String checked;
 	private List<TreeObject> children;
+	private String ppid;
 
 	public String getId() {
 		return id;
@@ -63,6 +64,14 @@ public class TreeObject implements Serializable {
 
 	public void setChildren(List<TreeObject> children) {
 		this.children = children;
+	}
+
+	public String getPpid() {
+		return ppid;
+	}
+
+	public void setPpid(String ppid) {
+		this.ppid = ppid;
 	}
 
 }

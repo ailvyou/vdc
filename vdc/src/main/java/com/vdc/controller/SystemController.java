@@ -54,7 +54,7 @@ public class SystemController extends BizBaseController {
 	}
 
 	private void buildMenuTree(Long parentMenuId, HttpServletResponse response) {
-		List<TreeObject> treeList = this.systemService.getMenuTree(parentMenuId);
+		List<TreeObject> treeList = this.systemService.getMenuTreeByParentId(parentMenuId);
 		Type tvListType = new TypeToken<List<TreeObject>>() {
 		}.getType();
 		String json = JsonUtil.objectToJson(treeList, tvListType);
@@ -141,6 +141,21 @@ public class SystemController extends BizBaseController {
 	@RequestMapping("/role/delete")
 	public void deleteRole(@RequestParam String ids, HttpServletResponse response) {
 		super.deleteRole(ids, response);
+	}
+
+	@RequestMapping("/role/gotoAuthorize/{roleId}")
+	public ModelAndView gotoAuthorize(@PathVariable Long roleId) {
+		return super.gotoAuthorize(roleId);
+	}
+
+	@RequestMapping("/role/loadMenuTree/{roleId}")
+	public void loadMenuTree(@PathVariable Long roleId, HttpServletResponse response) {
+		super.loadMenuTree(roleId, response);
+	}
+
+	@RequestMapping("/role/doAuthorize/{roleId}")
+	public void doAuthorize(@PathVariable Long roleId, @RequestParam String roleMenuData, HttpServletResponse response) {
+		super.doAuthorize(roleId, roleMenuData, response);
 	}
 
 	/*****************************************************/

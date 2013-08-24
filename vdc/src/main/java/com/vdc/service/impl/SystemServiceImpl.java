@@ -1,10 +1,13 @@
 package com.vdc.service.impl;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +16,7 @@ import com.vdc.dao.CustomerAccountLogMapper;
 import com.vdc.dao.CustomerInfoMapper;
 import com.vdc.dao.MenuInfoMapper;
 import com.vdc.dao.RoleInfoMapper;
+import com.vdc.dao.RoleMenuRefMapper;
 import com.vdc.dao.UserInfoMapper;
 import com.vdc.dto.Pagination;
 import com.vdc.dto.TreeObject;
@@ -21,6 +25,7 @@ import com.vdc.model.CustomerAccountLog;
 import com.vdc.model.CustomerInfo;
 import com.vdc.model.MenuInfo;
 import com.vdc.model.RoleInfo;
+import com.vdc.model.RoleMenuRef;
 import com.vdc.model.UserInfo;
 import com.vdc.service.SystemService;
 
@@ -32,6 +37,9 @@ public class SystemServiceImpl implements SystemService {
 
 	@Autowired
 	private RoleInfoMapper roleInfoMapper;
+
+	@Autowired
+	private RoleMenuRefMapper roleMenuRefMapper;
 
 	@Autowired
 	private UserInfoMapper userInfoMapper;
@@ -47,9 +55,13 @@ public class SystemServiceImpl implements SystemService {
 	 * 
 	 * @return
 	 */
-	public List<TreeObject> getMenuTree(Long parentMenuId) {
+	public List<TreeObject> getMenuTreeByParentId(Long parentMenuId) {
 		Map<String, Object> paramMap = new HashMap<String, Object>();
-		paramMap.put("parentMenuId", parentMenuId);
+		if (parentMenuId == null) {
+			paramMap.put("parentMenuIdIsNull", true);
+		} else {
+			paramMap.put("parentMenuId", parentMenuId);
+		}
 		List<TreeObject> treeList = this.menuInfoMapper.selectMenuForTree(paramMap);
 		return treeList;
 	}
@@ -100,6 +112,77 @@ public class SystemServiceImpl implements SystemService {
 	public void updateRoleInfo(RoleInfo record) {
 		record.setUpdateTime(new Date());
 		this.roleInfoMapper.updateByPrimaryKey(record);
+	}
+
+	/**
+	 * 获取角色权限
+	 */
+	public TreeObject getMenuTreeByRoleId(Long roleId) {
+		Long parentMenuId = null;
+		TreeObject tree = new TreeObject();
+		tree.setId("0");
+		tree.setText("权限结构列表");
+		tree.setState("open");
+
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("parentMenuIdIsNull", true);
+		List<MenuInfo> parentMenuList = this.menuInfoMapper.selectMenu(paramMap);
+
+		paramMap = new HashMap<String, Object>();
+		paramMap.put("roleId", roleId);
+		List<MenuInfo> checkedMenuList = this.menuInfoMapper.selectMenu(paramMap);
+		Set<Long> checkedIdList = new HashSet<Long>();
+		for (MenuInfo fun : checkedMenuList) {
+			checkedIdList.add(fun.getMenuId());
+		}
+
+		List<TreeObject> children = createMenuTree(parentMenuList, parentMenuId, checkedIdList);
+
+		tree.setChildren(children);
+		return tree;
+	}
+
+	/**
+	 * 生成权限树
+	 * 
+	 * @param parentMenuList
+	 * @param pid
+	 * @param checkedIdList
+	 * @return
+	 */
+	private List<TreeObject> createMenuTree(List<MenuInfo> parentMenuList, Long pid, Set<Long> checkedIdList) {
+		List<TreeObject> treeList = new ArrayList<TreeObject>();
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		for (MenuInfo menu : parentMenuList) {
+			if ((menu.getParentMenuId() == null && pid == null) || menu.getParentMenuId().longValue() == pid.longValue()) {
+				TreeObject tree = new TreeObject();
+				tree.setId(String.valueOf(menu.getMenuId()));
+				tree.setText(menu.getMenuName());
+
+				List<TreeObject> child = new ArrayList<TreeObject>();
+				paramMap.put("parentMenuId", menu.getMenuId());
+				List<MenuInfo> menuList = this.menuInfoMapper.selectMenu(paramMap);
+				if (menuList != null && !menuList.isEmpty()) {
+					child = createMenuTree(menuList, menu.getMenuId(), checkedIdList);
+					if (!child.isEmpty() && child.size() > 0) {
+						tree.setState("closed");
+						tree.setChildren(child);
+					}
+				}
+				if (!checkedIdList.isEmpty() && checkedIdList.contains(menu.getMenuId()) && tree.getChildren() == null) {
+					tree.setChecked("true");
+				}
+				treeList.add(tree);
+			}
+		}
+		return treeList;
+	}
+
+	public void saveRoleMenuList(Long roleId, List<RoleMenuRef> rmList) {
+		this.roleMenuRefMapper.deleteByRoleId(roleId);
+		for (RoleMenuRef rm : rmList) {
+			this.roleMenuRefMapper.insert(rm);
+		}
 	}
 
 	public Pagination<UserInfo> selectUserWithPagination(Pagination<UserInfo> pagination, Map<String, Object> paramMap) {
