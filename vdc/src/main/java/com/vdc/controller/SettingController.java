@@ -137,4 +137,11 @@ public class SettingController extends BizBaseController {
 	public void deleteUser(@RequestParam String ids, HttpServletResponse response) {
 		super.deleteUser(ids, response);
 	}
+
+	@RequestMapping("/shop/list")
+	public ModelAndView listShop() {
+		ModelAndView mv = new ModelAndView("/setting/shopList");
+
+		return mv;
+	}
 }

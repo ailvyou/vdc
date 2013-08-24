@@ -9,7 +9,13 @@
 <meta name="author" content="VDC Team" />
 <meta name="copyright" content="VDC" />
 <link href="${ctx}/css/common.css" rel="stylesheet" type="text/css" />
+<link href="${ctx}/css/ui/themes/default/easyui.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="${ctx}/js/jquery.js"></script>
+<script type="text/javascript" src="${ctx}/js/jquery.form.js"></script>
+<script type="text/javascript" src="${ctx}/js/jquery.tools.js"></script>
+<script type="text/javascript" src="${ctx}/js/jquery.validate.js"></script>
+<script type="text/javascript" src="${ctx}/js/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="${ctx}/js/base.js"></script>
 <script type="text/javascript" src="${ctx}/js/common.js"></script>
 <script type="text/javascript" src="${ctx}/js/list.js"></script>
 <style type="text/css">
