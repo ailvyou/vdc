@@ -31,6 +31,12 @@
 		<if test="userName != null">
 			and user_name = #{userName,jdbcType=VARCHAR}
 		</if>
+		<if test="userNameLike != null">
+			and user_name like CONCAT('%',#{userName,jdbcType=VARCHAR},'%')
+		</if>
+		<if test="customerIdIsNull != null">
+			and customer_id is null
+		</if>
 		<if test="customerId != null">
 			and customer_id = #{customerId,jdbcType=BIGINT}
 		</if>
@@ -45,6 +51,12 @@
 		where is_locked=0
 		<if test="userName != null">
 			and user_name = #{userName,jdbcType=VARCHAR}
+		</if>
+		<if test="userNameLike != null">
+			and user_name like CONCAT('%',#{userName,jdbcType=VARCHAR},'%')
+		</if>
+		<if test="customerIdIsNull != null">
+			and customer_id is null
 		</if>
 		<if test="customerId != null">
 			and customer_id = #{customerId,jdbcType=BIGINT}

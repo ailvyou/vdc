@@ -50,16 +50,19 @@
 		where customer_id = #{customerId,jdbcType=BIGINT}
 	</delete>
 	<insert id="insert" parameterType="com.vdc.model.CustomerInfo">
-		insert into customer_info (customer_name, is_company,
+		insert into customer_info (customer_id,customer_name, is_company,
 		contact_name, telephone, mobilephone,
 		email, qq, fax, account_balance,
 		create_time, create_by, update_time,
 		update_by)
-		values (#{customerName,jdbcType=VARCHAR}, #{isCompany,jdbcType=INTEGER},
+		values (#{customerId,jdbcType=BIGINT}, #{customerName,jdbcType=VARCHAR}, #{isCompany,jdbcType=INTEGER},
 		#{contactName,jdbcType=VARCHAR}, #{telephone,jdbcType=VARCHAR}, #{mobilephone,jdbcType=VARCHAR},
 		#{email,jdbcType=VARCHAR}, #{qq,jdbcType=VARCHAR}, #{fax,jdbcType=VARCHAR}, #{accountBalance,jdbcType=DECIMAL},
 		#{createTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=BIGINT}, #{updateTime,jdbcType=TIMESTAMP},
 		#{updateBy,jdbcType=BIGINT})
+	    <selectKey resultType="java.lang.Long" order="AFTER" keyProperty="customerId" >   
+	    	SELECT LAST_INSERT_ID() AS customer_id   
+	    </selectKey>
 	</insert>
 	<update id="updateByPrimaryKeySelective" parameterType="com.vdc.model.CustomerInfo">
 		update customer_info

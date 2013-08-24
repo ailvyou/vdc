@@ -35,7 +35,6 @@ $().ready(function() {
 	// 表单验证
 	$inputForm.validate({
 		rules: {
-			isCompany: "required",
 			customerName: "required",
 			contactName: "required",
 			telephone: "required",
@@ -65,10 +64,10 @@ $().ready(function() {
 		<table class="input tabContent">
 			<tr>
 				<th>
-					<span class="requiredField">*</span>是否企业:
+					是否企业:
 				</th>
 				<td>
-					<input type="text" name="isCompany" value="${customer.isCompany}" class="text" maxlength="200" />
+					<input type="checkbox" name="isCompany" value="1"/>
 				</td>
 			</tr>
 			<tr>

@@ -82,10 +82,10 @@ $().ready(function() {
 					<a href="javascript:;" target="_blank">关于我们</a>
 				</div>
 				<div class="link">
-					<strong>admin</strong>
+					<strong>${sessionScope['www_vdc_com_user_info'].userName}</strong>
 					您好!
 					<a href="javascript:;" target="iframe">[账号设置]</a>
-					<a href="${ctx}" target="_top">[注销]</a>
+					<a href="${ctx}/logout" target="_top">[注销]</a>
 				</div>
 			</th>
 		</tr>

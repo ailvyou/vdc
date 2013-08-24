@@ -73,6 +73,23 @@ public class SettingController extends BizBaseController {
 		super.deleteRole(ids, response);
 	}
 
+	@RequestMapping("/role/gotoAuthorize/{roleId}")
+	public ModelAndView gotoAuthorize(@PathVariable Long roleId) {
+		ModelAndView mv = super.gotoAuthorize(roleId);
+		mv.setViewName("/setting/roleAuthorize");
+		return mv;
+	}
+
+	@RequestMapping("/role/loadMenuTree/{roleId}")
+	public void loadMenuTree(@PathVariable Long roleId, HttpServletRequest req, HttpServletResponse response) {
+		super.loadMenuTree(roleId, req, response);
+	}
+
+	@RequestMapping("/role/doAuthorize/{roleId}")
+	public void doAuthorize(@PathVariable Long roleId, @RequestParam String roleMenuData, HttpServletRequest req, HttpServletResponse response) {
+		super.doAuthorize(roleId, roleMenuData, req, response);
+	}
+
 	/*****************************************************/
 	/**
 	 * 用户列表

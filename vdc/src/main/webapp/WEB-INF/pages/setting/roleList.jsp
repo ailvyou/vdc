@@ -37,6 +37,23 @@
 $().ready(function() {
 	
 });
+function gotoAuthorize(roleId){
+	var actionUrl="${ctx}/setting/role/gotoAuthorize/"+roleId;
+	$.dialog({
+		title: "分配菜单",
+		content: "",
+		width: 670,
+		modal: true,
+		ok: "保&nbsp;&nbsp;存",
+		cancel: "关&nbsp;&nbsp;闭",
+		onShow: function(){
+			ajaxRequestCommon(".dialogContent",actionUrl,"get","html",null);
+		},
+		onOk: function(){
+			setRoleMenuData();
+		}
+	});	
+}
 </script>
 </head>
 <body>
@@ -128,6 +145,7 @@ $().ready(function() {
 					</td>
 					<td>
 						<a href="${ctx}/setting/role/edit/${item.roleId}">[编辑]</a>
+						<a style="margin-left:20px" href="javascript:;" onclick="gotoAuthorize('${item.roleId}');">[分配菜单]</a>
 					</td>
 				</tr>
 			</c:forEach>

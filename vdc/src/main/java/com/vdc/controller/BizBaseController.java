@@ -46,7 +46,12 @@ public class BizBaseController extends BaseController {
 	public ModelAndView listRole(Pagination<RoleInfo> pagination, Map<String, Object> paramMap, HttpServletRequest req) {
 		ModelAndView mv = new ModelAndView("/system/roleList");
 
-		paramMap.put("customerId", super.getCurrentCustomerId(req));
+		Long currentCustomerId = super.getCurrentCustomerId(req);
+		if (currentCustomerId == null) {
+			paramMap.put("customerIdIsNull", true);
+		} else {
+			paramMap.put("customerId", super.getCurrentCustomerId(req));
+		}
 		if (paramMap.get("searchProperty") != null && !"".equals(paramMap.get("searchProperty").toString())) {
 			paramMap.put(paramMap.get("searchProperty").toString(), paramMap.get("searchValue").toString());
 		}
@@ -175,7 +180,12 @@ public class BizBaseController extends BaseController {
 	public ModelAndView listUser(Pagination<UserInfo> pagination, Map<String, Object> paramMap, HttpServletRequest req) {
 		ModelAndView mv = new ModelAndView("/system/userList");
 
-		paramMap.put("customerId", super.getCurrentCustomerId(req));
+		Long currentCustomerId = super.getCurrentCustomerId(req);
+		if (currentCustomerId == null) {
+			paramMap.put("customerIdIsNull", true);
+		} else {
+			paramMap.put("customerId", super.getCurrentCustomerId(req));
+		}
 		if (paramMap.get("searchProperty") != null && !"".equals(paramMap.get("searchProperty").toString())) {
 			paramMap.put(paramMap.get("searchProperty").toString(), paramMap.get("searchValue").toString());
 		}

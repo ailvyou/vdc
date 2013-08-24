@@ -22,10 +22,13 @@
 		from role_info
 		where 1=1
 		<if test="roleName != null">
-			and role_name = #{roleName,jdbcType=VARCHAR}
+			and role_name like CONCAT('%',#{roleName,jdbcType=VARCHAR},'%')
 		</if>
 		<if test="parentRoleId != null">
 			and parent_role_id = #{parentRoleId,jdbcType=BIGINT}
+		</if>
+		<if test="customerIdIsNull != null">
+			and customer_id is null
 		</if>
 		<if test="customerId != null">
 			and customer_id = #{customerId,jdbcType=BIGINT}
@@ -37,10 +40,13 @@
 		from role_info
 		where 1=1
 		<if test="roleName != null">
-			and role_name = #{roleName,jdbcType=VARCHAR}
+			and role_name like CONCAT('%',#{roleName,jdbcType=VARCHAR},'%')
 		</if>
 		<if test="parentRoleId != null">
 			and parent_role_id = #{parentRoleId,jdbcType=BIGINT}
+		</if>
+		<if test="customerIdIsNull != null">
+			and customer_id is null
 		</if>
 		<if test="customerId != null">
 			and customer_id = #{customerId,jdbcType=BIGINT}

@@ -4,12 +4,12 @@
  Source Server         : localhost
  Source Server Version : 50613
  Source Host           : localhost
- Source Database       : vdc
+ Source Database       : vdc2
 
  Target Server Version : 50613
  File Encoding         : utf-8
 
- Date: 08/14/2013 23:23:15 PM
+ Date: 08/24/2013 21:18:53 PM
 */
 
 SET NAMES utf8;
@@ -74,7 +74,7 @@ CREATE TABLE `menu_info` (
 --  Records of `menu_info`
 -- ----------------------------
 BEGIN;
-INSERT INTO `menu_info` VALUES ('1', '系统管理', null, null, null, '1', '1', null, '3'), ('2', '菜单管理', '1', null, '/system/menu/list', '2', '1', null, '3'), ('3', '角色管理', '1', null, '/system/role/list', '2', '1', null, '3'), ('4', '用户管理', '1', null, '/system/user/list', '2', '1', null, '3'), ('5', '客户管理', '1', null, '/system/customer/list', '2', '1', null, '3'), ('6', '基本设置', null, null, null, '1', '1', '3', null), ('7', '角色管理', '6', null, '/customer/role/list', '2', '1', '3', null), ('8', '用户管理', '6', null, '/customer/user/list', '2', '1', '3', null), ('9', '店铺设置', '6', null, '/customer/shop/setting', '2', '1', '3', null), ('10', '仓库设置', '6', null, '/customer/warehouse/setting', '2', '1', '3', null), ('11', '服务费充值', '6', null, '/customer/recharge', '2', '1', '3', null), ('12', '商品管理', null, null, null, '1', '1', null, null), ('13', '商品分类', '12', null, '/goods/category', '2', '1', null, null), ('14', '商品参数', '12', null, '/goods/param', '2', '1', null, null), ('15', '商品列表', '12', null, '/goods/list', '2', '1', null, null), ('16', '订单管理', null, null, null, '1', '1', null, null), ('17', '订单列表', '16', null, '/trade/list', '2', '1', null, null), ('18', '会员管理', null, null, null, '1', '1', null, null), ('19', '会员等级', '18', null, '/member/grade', '2', '1', null, null), ('20', '会员列表', '18', null, '/member/list', '2', '1', null, null), ('21', '统计', null, null, null, '1', '1', null, null), ('22', '销售统计', '21', null, '/report/sales', '2', '1', null, null);
+INSERT INTO `menu_info` VALUES ('1', '系统管理', null, null, null, '1', '1', '2', null), ('2', '菜单管理', '1', null, '/system/menu/list', '2', '1', null, null), ('3', '角色管理', '1', null, '/system/role/list', '2', '1', null, null), ('4', '用户管理', '1', null, '/system/user/list', '2', '1', null, null), ('5', '客户管理', '1', null, '/system/customer/list', '2', '1', null, null), ('6', '基本设置', null, null, null, '1', '1', '3', null), ('7', '角色管理', '6', null, '/setting/role/list', '2', '1', null, null), ('8', '用户管理', '6', null, '/setting/user/list', '2', '1', null, null), ('9', '店铺设置', '6', null, '/setting/shop/list', '2', '1', null, null), ('10', '仓库设置', '6', null, '/setting/warehouse/list', '2', '1', null, null), ('11', '服务费充值', '6', null, '/setting/recharge', '2', '1', null, null), ('12', '商品管理', null, null, null, '1', '1', null, null), ('13', '商品分类', '12', null, '/goods/category', '2', '1', null, null), ('14', '商品参数', '12', null, '/goods/param', '2', '1', null, null), ('15', '商品列表', '12', null, '/goods/list', '2', '1', null, null), ('16', '订单管理', null, null, null, '1', '1', null, null), ('17', '订单列表', '16', null, '/trade/list', '2', '1', null, null), ('18', '会员管理', null, null, null, '1', '1', null, null), ('19', '会员等级', '18', null, '/member/grade', '2', '1', null, null), ('20', '会员列表', '18', null, '/member/list', '2', '1', null, null), ('21', '统计', null, null, null, '1', '1', null, null), ('22', '销售统计', '21', null, '/report/sales', '2', '1', null, null);
 COMMIT;
 
 -- ----------------------------
@@ -92,14 +92,7 @@ CREATE TABLE `role_info` (
   `update_time` datetime DEFAULT NULL,
   `update_by` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`role_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
-
--- ----------------------------
---  Records of `role_info`
--- ----------------------------
-BEGIN;
-INSERT INTO `role_info` VALUES ('1', '系统超级管理员', null, null, '1', '2013-08-04 12:26:41', '1', '2013-08-04 12:26:41', '1'), ('2', '系统管理员', '1', null, '1', '2013-08-04 12:26:41', '1', '2013-08-04 12:26:41', '1'), ('3', '客户管理员', '1', null, '1', '2013-08-04 12:26:41', '1', '2013-08-04 12:26:41', '1'), ('4', '订单操作员', null, null, '1', null, null, null, null), ('5', '商品维护员', null, null, '1', null, null, null, null), ('6', 'aaaa', null, null, '1', null, null, null, null);
-COMMIT;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `role_menu_ref`
@@ -137,13 +130,6 @@ CREATE TABLE `user_info` (
   `update_time` datetime DEFAULT NULL,
   `update_by` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`user_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
-
--- ----------------------------
---  Records of `user_info`
--- ----------------------------
-BEGIN;
-INSERT INTO `user_info` VALUES ('1', 'root', 'root', null, '1', '系统超级管理员用户', null, null, null, null, null, '0', '2013-08-04 12:26:41', '1', '2013-08-04 12:26:41', '1');
-COMMIT;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 SET FOREIGN_KEY_CHECKS = 1;
