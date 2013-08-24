@@ -2,6 +2,7 @@ package com.vdc.controller;
 
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,8 +34,8 @@ public class SettingController extends BizBaseController {
 	 * @return
 	 */
 	@RequestMapping("/role/list")
-	public ModelAndView listRole(@ModelAttribute Pagination<RoleInfo> pagination, @RequestParam Map<String, Object> paramMap) {
-		ModelAndView mv = super.listRole(pagination, paramMap);
+	public ModelAndView listRole(@ModelAttribute Pagination<RoleInfo> pagination, @RequestParam Map<String, Object> paramMap, HttpServletRequest req) {
+		ModelAndView mv = super.listRole(pagination, paramMap, req);
 		mv.setViewName("/setting/roleList");
 		return mv;
 	}
@@ -47,8 +48,8 @@ public class SettingController extends BizBaseController {
 	}
 
 	@RequestMapping("/role/save")
-	public ModelAndView saveRole(@ModelAttribute RoleInfo roleForm) {
-		ModelAndView mv = super.saveRole(roleForm);
+	public ModelAndView saveRole(@ModelAttribute RoleInfo roleForm, HttpServletRequest req) {
+		ModelAndView mv = super.saveRole(roleForm, req);
 		mv.setViewName("redirct:/setting/role/list");
 		return mv;
 	}
@@ -61,8 +62,8 @@ public class SettingController extends BizBaseController {
 	}
 
 	@RequestMapping("/role/update/{roleId}")
-	public ModelAndView updateRole(@PathVariable Long roleId, @ModelAttribute RoleInfo roleForm) {
-		ModelAndView mv = super.updateRole(roleId, roleForm);
+	public ModelAndView updateRole(@PathVariable Long roleId, @ModelAttribute RoleInfo roleForm, HttpServletRequest req) {
+		ModelAndView mv = super.updateRole(roleId, roleForm, req);
 		mv.setViewName("redirct:/setting/role/list");
 		return mv;
 	}
@@ -81,36 +82,36 @@ public class SettingController extends BizBaseController {
 	 * @return
 	 */
 	@RequestMapping("/user/list")
-	public ModelAndView listUser(@ModelAttribute Pagination<UserInfo> pagination, @RequestParam Map<String, Object> paramMap) {
-		ModelAndView mv = super.listUser(pagination, paramMap);
+	public ModelAndView listUser(@ModelAttribute Pagination<UserInfo> pagination, @RequestParam Map<String, Object> paramMap, HttpServletRequest req) {
+		ModelAndView mv = super.listUser(pagination, paramMap, req);
 		mv.setViewName("/setting/userList");
 		return mv;
 	}
 
 	@RequestMapping("/user/create")
-	public ModelAndView createUser() {
-		ModelAndView mv = super.createUser();
+	public ModelAndView createUser(HttpServletRequest req) {
+		ModelAndView mv = super.createUser(req);
 		mv.setViewName("/setting/userEdit");
 		return mv;
 	}
 
 	@RequestMapping("/user/save")
-	public ModelAndView saveUser(@ModelAttribute UserInfo userForm) {
-		ModelAndView mv = super.saveUser(userForm);
+	public ModelAndView saveUser(@ModelAttribute UserInfo userForm, HttpServletRequest req) {
+		ModelAndView mv = super.saveUser(userForm, req);
 		mv.setViewName("redirect:/setting/user/list");
 		return mv;
 	}
 
 	@RequestMapping("/user/edit/{userId}")
-	public ModelAndView editUser(@PathVariable Long userId) {
-		ModelAndView mv = super.editUser(userId);
+	public ModelAndView editUser(@PathVariable Long userId, HttpServletRequest req) {
+		ModelAndView mv = super.editUser(userId, req);
 		mv.setViewName("/setting/userEdit");
 		return mv;
 	}
 
 	@RequestMapping("/user/update/{userId}")
-	public ModelAndView updateUser(@PathVariable Long userId, @ModelAttribute UserInfo userForm) {
-		ModelAndView mv = super.updateUser(userId, userForm);
+	public ModelAndView updateUser(@PathVariable Long userId, @ModelAttribute UserInfo userForm, HttpServletRequest req) {
+		ModelAndView mv = super.updateUser(userId, userForm, req);
 		mv.setViewName("redirect:/setting/user/list");
 		return mv;
 	}

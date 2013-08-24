@@ -121,19 +121,26 @@ public class SystemServiceImpl implements SystemService {
 		Long parentMenuId = null;
 		TreeObject tree = new TreeObject();
 		tree.setId("0");
-		tree.setText("权限结构列表");
+		tree.setText("菜单树");
 		tree.setState("open");
 
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("parentMenuIdIsNull", true);
-		List<MenuInfo> parentMenuList = this.menuInfoMapper.selectMenu(paramMap);
+		List<MenuInfo> tempParentMenuList = this.menuInfoMapper.selectMenu(paramMap);
+		List<MenuInfo> parentMenuList = new ArrayList<MenuInfo>();
+		for (MenuInfo menu : tempParentMenuList) {
+			if (menu.getAllowRoleId() != null && !menu.getAllowRoleId().equals(roleId)) {
+				continue;
+			}
+			parentMenuList.add(menu);
+		}
 
 		paramMap = new HashMap<String, Object>();
 		paramMap.put("roleId", roleId);
 		List<MenuInfo> checkedMenuList = this.menuInfoMapper.selectMenu(paramMap);
 		Set<Long> checkedIdList = new HashSet<Long>();
-		for (MenuInfo fun : checkedMenuList) {
-			checkedIdList.add(fun.getMenuId());
+		for (MenuInfo menu : checkedMenuList) {
+			checkedIdList.add(menu.getMenuId());
 		}
 
 		List<TreeObject> children = createMenuTree(parentMenuList, parentMenuId, checkedIdList);

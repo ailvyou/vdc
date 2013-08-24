@@ -9,6 +9,8 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.vdc.constants.Constants;
+import com.vdc.dto.UserDto;
 import com.vdc.util.JsonUtil;
 import com.vdc.util.RandomValidateCodeUtil;
 
@@ -17,37 +19,55 @@ public class BaseController {
 	// protected static final String MSG = "msg";
 	// protected static final String IS_SUCCESS = "isSuccess";
 
-	// /**
-	// * 获得session中的用户
-	// *
-	// * @param request
-	// * @return
-	// * @author jack
-	// */
-	// protected UserDto getSessionUser(HttpServletRequest request) {
-	// UserDto sessionUser = null;
-	// String userId = this.getCookieUserId(request);
-	// if (userId != null) {
-	// sessionUser = (UserDto) MemcachedUtil.getInstance().get(userId);
-	// }
-	// return sessionUser;
-	// }
-	//
-	// /**
-	// * 获得session中的当前用户ID
-	// *
-	// * @param request
-	// * @return
-	// * @author daniel
-	// */
-	// // @ModelAttribute("currentUserId")
-	// protected Long getCurrentUserId(HttpServletRequest request) {
-	// UserDto sessionUser = getSessionUser(request);
-	// if (sessionUser != null && sessionUser.getUserId() != null) {
-	// return sessionUser.getUserId();
-	// }
-	// return null;
-	// }
+	/**
+	 * 获得session中的用户
+	 * 
+	 * @param request
+	 * @return
+	 * @author jack
+	 */
+	protected UserDto getSessionUser(HttpServletRequest req) {
+		UserDto sessionUser = null;
+		// String userId = this.getCookieUserId(request);
+		// if (userId != null) {
+		// sessionUser = (UserDto) MemcachedUtil.getInstance().get(userId);
+		// }
+		if (req.getSession().getAttribute(Constants.USER_INFO) != null) {
+			return (UserDto) req.getSession().getAttribute(Constants.USER_INFO);
+		}
+		return sessionUser;
+	}
+
+	/**
+	 * 获得session中的当前用户ID
+	 * 
+	 * @param req
+	 * @return
+	 * @author daniel
+	 */
+	protected Long getCurrentUserId(HttpServletRequest req) {
+		UserDto sessionUser = getSessionUser(req);
+		if (sessionUser != null && sessionUser.getUserId() != null) {
+			return sessionUser.getUserId();
+		}
+		return null;
+	}
+
+	/**
+	 * 获得session中的当前客户ID
+	 * 
+	 * @param req
+	 * @return
+	 * @author daniel
+	 */
+	protected Long getCurrentCustomerId(HttpServletRequest req) {
+		UserDto sessionUser = getSessionUser(req);
+		if (sessionUser != null && sessionUser.getCustomerId() != null) {
+			return sessionUser.getCustomerId();
+		}
+		return null;
+	}
+
 	//
 	// /**
 	// * 获得cookie中的用户信息

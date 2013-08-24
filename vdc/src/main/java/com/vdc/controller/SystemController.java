@@ -4,6 +4,7 @@ import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -114,8 +115,8 @@ public class SystemController extends BizBaseController {
 	 * @return
 	 */
 	@RequestMapping("/role/list")
-	public ModelAndView listRole(@ModelAttribute Pagination<RoleInfo> pagination, @RequestParam Map<String, Object> paramMap) {
-		return super.listRole(pagination, paramMap);
+	public ModelAndView listRole(@ModelAttribute Pagination<RoleInfo> pagination, @RequestParam Map<String, Object> paramMap, HttpServletRequest req) {
+		return super.listRole(pagination, paramMap, req);
 	}
 
 	@RequestMapping("/role/create")
@@ -124,8 +125,8 @@ public class SystemController extends BizBaseController {
 	}
 
 	@RequestMapping("/role/save")
-	public ModelAndView saveRole(@ModelAttribute RoleInfo roleForm) {
-		return super.saveRole(roleForm);
+	public ModelAndView saveRole(@ModelAttribute RoleInfo roleForm, HttpServletRequest req) {
+		return super.saveRole(roleForm, req);
 	}
 
 	@RequestMapping("/role/edit/{roleId}")
@@ -134,8 +135,8 @@ public class SystemController extends BizBaseController {
 	}
 
 	@RequestMapping("/role/update/{roleId}")
-	public ModelAndView updateRole(@PathVariable Long roleId, @ModelAttribute RoleInfo roleForm) {
-		return super.updateRole(roleId, roleForm);
+	public ModelAndView updateRole(@PathVariable Long roleId, @ModelAttribute RoleInfo roleForm, HttpServletRequest req) {
+		return super.updateRole(roleId, roleForm, req);
 	}
 
 	@RequestMapping("/role/delete")
@@ -149,13 +150,13 @@ public class SystemController extends BizBaseController {
 	}
 
 	@RequestMapping("/role/loadMenuTree/{roleId}")
-	public void loadMenuTree(@PathVariable Long roleId, HttpServletResponse response) {
-		super.loadMenuTree(roleId, response);
+	public void loadMenuTree(@PathVariable Long roleId, HttpServletRequest req, HttpServletResponse response) {
+		super.loadMenuTree(roleId, req, response);
 	}
 
 	@RequestMapping("/role/doAuthorize/{roleId}")
-	public void doAuthorize(@PathVariable Long roleId, @RequestParam String roleMenuData, HttpServletResponse response) {
-		super.doAuthorize(roleId, roleMenuData, response);
+	public void doAuthorize(@PathVariable Long roleId, @RequestParam String roleMenuData, HttpServletRequest req, HttpServletResponse response) {
+		super.doAuthorize(roleId, roleMenuData, req, response);
 	}
 
 	/*****************************************************/
@@ -167,32 +168,32 @@ public class SystemController extends BizBaseController {
 	 * @return
 	 */
 	@RequestMapping("/user/list")
-	public ModelAndView listUser(@ModelAttribute Pagination<UserInfo> pagination, @RequestParam Map<String, Object> paramMap) {
-		ModelAndView mv = super.listUser(pagination, paramMap);
+	public ModelAndView listUser(@ModelAttribute Pagination<UserInfo> pagination, @RequestParam Map<String, Object> paramMap, HttpServletRequest req) {
+		ModelAndView mv = super.listUser(pagination, paramMap, req);
 		return mv;
 	}
 
 	@RequestMapping("/user/create")
-	public ModelAndView createUser() {
-		ModelAndView mv = super.createUser();
+	public ModelAndView createUser(HttpServletRequest req) {
+		ModelAndView mv = super.createUser(req);
 		return mv;
 	}
 
 	@RequestMapping("/user/save")
-	public ModelAndView saveUser(@ModelAttribute UserInfo userForm) {
-		ModelAndView mv = super.saveUser(userForm);
+	public ModelAndView saveUser(@ModelAttribute UserInfo userForm, HttpServletRequest req) {
+		ModelAndView mv = super.saveUser(userForm, req);
 		return mv;
 	}
 
 	@RequestMapping("/user/edit/{userId}")
-	public ModelAndView editUser(@PathVariable Long userId) {
-		ModelAndView mv = super.editUser(userId);
+	public ModelAndView editUser(@PathVariable Long userId, HttpServletRequest req) {
+		ModelAndView mv = super.editUser(userId, req);
 		return mv;
 	}
 
 	@RequestMapping("/user/update/{userId}")
-	public ModelAndView updateUser(@PathVariable Long userId, @ModelAttribute UserInfo userForm) {
-		ModelAndView mv = super.updateUser(userId, userForm);
+	public ModelAndView updateUser(@PathVariable Long userId, @ModelAttribute UserInfo userForm, HttpServletRequest req) {
+		ModelAndView mv = super.updateUser(userId, userForm, req);
 		return mv;
 	}
 

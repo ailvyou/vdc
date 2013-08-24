@@ -6,9 +6,6 @@
 			checkbox: true,
 			url:'${ctx}/system/role/loadMenuTree/${roleId}',
 			onClick:function(node){
-				//$('#tt2').tree('options').url='http://localhost/Super_sqmis/loadTypeTreeUseJson.do?rootPcode='+node.id;
-				//$(this).tree('toggle', node.target);
-				//alert('you dbclick '+node.text);
 			},
 			onContextMenu: function(e, node){
 				e.preventDefault();
@@ -46,9 +43,7 @@
 </script>
 <ul>
 	<form id="roleFunctionForm" target="mainFrame" action="${ctx}/system/role/doAuthorize/${roleId}" method="post">
-	 <input id="roleFunction_Data" name="roleMenuData" type="hidden"/> 
-	<!-- <input type="button" value="确定" onclick="submitRoleMenuData();" />
-	<input type="button" value="关闭" onclick="" /> -->
+	 <input id="roleFunction_Data" name="roleMenuData" type="hidden"/>
 	</form>
 </ul>
 <ul id="tt2"></ul>

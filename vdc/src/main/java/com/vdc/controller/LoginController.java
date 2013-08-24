@@ -10,15 +10,17 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.vdc.constants.Constants;
+import com.vdc.dto.UserDto;
 import com.vdc.enums.RoleEnum;
 import com.vdc.model.MenuInfo;
 import com.vdc.model.UserInfo;
 import com.vdc.service.SystemService;
+import com.vdc.util.ObjectUtil;
 
 @Controller
 public class LoginController extends BaseController {
@@ -40,14 +42,18 @@ public class LoginController extends BaseController {
 	// }
 
 	@RequestMapping("/login")
-	public ModelAndView login(@RequestParam String username, @RequestParam String password, @RequestParam String captcha) {
+	public ModelAndView login(@RequestParam String username, @RequestParam String password, @RequestParam String captcha, HttpServletRequest req) {
 		UserInfo user = systemService.selectUserByName(username);
 		if (user == null || !password.equals(user.getPassword())) {
 			return new ModelAndView("/login");
 		}
-		ModelMap map = new ModelMap();
-		map.addAttribute("roleId", user.getRoleId());
-		return new ModelAndView("redirect:/main", map);
+		UserDto userDto = new UserDto();
+		ObjectUtil.copyProperties(userDto, user);
+		req.getSession().setAttribute(Constants.USER_INFO, userDto);
+		// ModelMap map = new ModelMap();
+		// map.addAttribute("roleId", user.getRoleId());
+		// return new ModelAndView("redirect:/main", map);
+		return new ModelAndView("redirect:/main");
 	}
 
 	@RequestMapping("/main")
@@ -55,7 +61,8 @@ public class LoginController extends BaseController {
 		ModelAndView mv = new ModelAndView("/main");
 		Long roleId = null;
 		try {
-			roleId = Long.valueOf(req.getParameter("roleId"));
+			// roleId = Long.valueOf(req.getParameter("roleId"));
+			roleId = super.getSessionUser(req).getRoleId();
 		} catch (Exception e) {
 		}
 		initMenuList(mv, roleId);
